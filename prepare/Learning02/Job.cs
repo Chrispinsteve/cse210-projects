@@ -15,6 +15,6 @@ public class Job
 
   public void Display()
   {
-    console.WriteLine($"{_jobTitle} ({_company}) {_duration}");
+    Console.WriteLine($"{_jobTitle} ({_company}) {_duration}");
   }
 }

@@ -10,7 +10,7 @@ class Program
 
         //Display job details using Display method
         job1.Display();
-        job2?Display();
+        job2.Display();
 
         //Create a resume instance
         Resume myResume = new Resume("John Doe");

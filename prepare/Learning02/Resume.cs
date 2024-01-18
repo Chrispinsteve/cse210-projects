@@ -19,7 +19,7 @@ public class Resume
 
   public void Display()
   {
-    Console.Writeline($"Resume of {_personName}");
+    Console.WriteLine($"Resume of {_personName}");
     foreach (var job in _jobs) 
     {
       job.Display();

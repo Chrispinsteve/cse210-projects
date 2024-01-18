@@ -16,4 +16,13 @@ public class Resume
   {
     _jobs.Add(job);
   }
+
+  public void Display()
+  {
+    Console.Writeline($"Resume of {_personName}");
+    foreach (var job in _jobs) 
+    {
+      job.Display();
+    }
+  }
 }

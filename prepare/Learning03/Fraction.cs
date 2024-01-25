@@ -14,14 +14,14 @@ public class Fraction
         bottom = 1;
     }
 
-    // Constructor that has one parameter for the top and initializes the denominator to 1
+    //-----Constructor that has one parameter for the top and initializes the denominator to 1
     public Fraction(int top)
     {
         this.top = top;
         bottom = 1;
     }
 
-    // Constructor that has two parameters, one for the top and one for the bottom
+    //-----Constructor that has two parameters, one for the top and one for the bottom
     public Fraction(int top, int bottom)
     {
         if (bottom == 0)
@@ -32,10 +32,10 @@ public class Fraction
         this.top = top;
         this.bottom = bottom;
 
-        Simplify(); // Simplify the fraction after initialization
+        Simplify(); //-----Simplify the fraction after initialization
     }
 
-    // Method to simplify the fraction
+    //------Method to simplify the fraction
     private void Simplify()
     {
         int gcd = GCD(Math.Abs(top), Math.Abs(bottom));
@@ -43,7 +43,7 @@ public class Fraction
         top /= gcd;
         bottom /= gcd;
 
-        // Make sure the sign is on the top
+        //------Make sure the sign is on the top
         if (bottom < 0)
         {
             top = -top;
@@ -51,7 +51,7 @@ public class Fraction
         }
     }
 
-    // Method to calculate the greatest common divisor (GCD) using Euclidean algorithm
+    //------Method to calculate the greatest common divisor (GCD) using Euclidean algorithm
     private int GCD(int a, int b)
     {
         while (b != 0)
@@ -63,7 +63,7 @@ public class Fraction
         return a;
     }
 
-    // Getters and setters for the top and bottom values
+    //-------Getters and setters for the top and bottom values
     public int GetTop()
     {
         return top;
@@ -91,7 +91,7 @@ public class Fraction
         Simplify();
     }
 
-    // Method to convert the fraction to a string representation
+    //-------Method to convert the fraction to a string representation
     public override string ToString()
     {
         return $"{top}/{bottom}";

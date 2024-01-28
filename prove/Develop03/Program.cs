@@ -1,19 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 class Program
 {
     static void Main()
     {
-        // Create a scripture
+        //Exceed reuirements--------------------
+        Console.WriteLine("Hello there!");
+        Console.Write("What is your name?: ");
+        string name = Console.ReadLine();
+        Console.WriteLine($"\n{name} that's Good! Now let's see how we can hide words\n");
+
+        // scripture
         Scripture john316 = new Scripture("John 3:16", "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.");
-        // Display the complete scripture
+        // ----------------Display scripture----
         john316.Display();
-        // Continue hiding words until all words are hidden or the user types quit
+
+
         while (!john316.AllWordsHidden())
         {
-            // Prompt the user to press enter or type quit
-            Console.WriteLine("Press enter to continue or type 'quit' to end.");
+
+            Console.WriteLine($"{name} press enter to continue or type 'quit' to end.");
             string input = Console.ReadLine();
             if (input.ToLower().Equals("quit"))
             {
@@ -21,9 +29,9 @@ class Program
                 Console.ReadKey();
                 return;
             }
-            // Hide a few random words
+
             john316.HideRandomWords();
-            // Clear the console screen and display the modified scripture
+            
             Console.Clear();
             john316.Display();
         }

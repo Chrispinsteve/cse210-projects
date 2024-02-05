@@ -56,24 +56,23 @@ class Program
 
 abstract class Activity
 {
+    protected string _name;
+    protected string _description;
     protected int Duration;
 
-    public Activity(int duration)
+    public Activity(string name, string description, int duration)
     {
+        _name = name;
+        _description = description;
         Duration = duration;
     }
 
     public void Start()
     {
-        Console.WriteLine($"Starting {GetType().Name} - {GetDescription()}");
+        Console.WriteLine($"Starting {_name} - {_description}");
         PrepareToBegin();
         PerformActivity();
         Finish();
-    }
-
-    protected virtual string GetDescription()
-    {
-        return "This is a default activity description.";
     }
 
     protected virtual void PrepareToBegin()
@@ -85,7 +84,7 @@ abstract class Activity
     protected virtual void Finish()
     {
         Console.WriteLine("Good job! You have completed the activity.");
-        ShowAnimation($"Activity completed: {GetType().Name} - Duration: {Duration} seconds");
+        ShowAnimation($"Activity completed: {_name} - Duration: {Duration} seconds");
         Thread.Sleep(3000);
     }
 
@@ -101,12 +100,7 @@ abstract class Activity
 
 class BreathingActivity : Activity
 {
-    public BreathingActivity(int duration) : base(duration) { }
-
-    protected override string GetDescription()
-    {
-        return "This activity will help you relax by walking you through breathing.";
-    }
+    public BreathingActivity(int duration) : base("Breathing", "This activity will help you relax by walking you through breathing.", duration) { }
 
     protected override void PerformActivity()
     {
@@ -120,17 +114,16 @@ class BreathingActivity : Activity
         }
     }
 }
-
 class ReflectionActivity : Activity
 {
-    private readonly string[] prompts = {
+    private readonly string[] _prompts = {
         "Think of a time when you stood up for someone else.",
         "Think of a time when you did something really difficult.",
         "Think of a time when you helped someone in need.",
         "Think of a time when you did something truly selfless."
     };
 
-    private readonly string[] questions = {
+    private readonly string[] _questions = {
         "Why was this experience meaningful to you?",
         "Have you ever done anything like this before?",
         "How did you get started?",
@@ -142,24 +135,19 @@ class ReflectionActivity : Activity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectionActivity(int duration) : base(duration) { }
-
-    protected override string GetDescription()
-    {
-        return "This activity will help you reflect on times in your life when you have shown strength and resilience.";
-    }
+    public ReflectionActivity(int duration) : base("Reflection", "This activity will help you reflect on times in your life when you have shown strength and resilience.", duration) { }
 
     protected override void PerformActivity()
     {
         Console.WriteLine("Reflect on times in your life when you have shown strength and resilience.");
         for (int i = 0; i < Duration; i++)
         {
-            string prompt = prompts[i % prompts.Length];
+            string prompt = _prompts[i % _prompts.Length];
             Console.WriteLine(prompt);
             ShowAnimation("Reflecting...");
             Thread.Sleep(2000);
 
-            foreach (string question in questions)
+            foreach (string question in _questions)
             {
                 Console.WriteLine(question);
                 ShowAnimation("Pausing...");
@@ -171,7 +159,7 @@ class ReflectionActivity : Activity
 
 class ListingActivity : Activity
 {
-    private readonly string[] prompts = {
+    private readonly string[] _prompts = {
         "Who are people that you appreciate?",
         "What are personal strengths of yours?",
         "Who are people that you have helped this week?",
@@ -179,18 +167,14 @@ class ListingActivity : Activity
         "Who are some of your personal heroes?"
     };
 
-    public ListingActivity(int duration) : base(duration) { }
-
-    protected override string GetDescription()
-    {
-        return "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
-    }
+    public ListingActivity(int duration) : base("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.", duration) { }
 
     protected override void PerformActivity()
     {
-        string prompt = prompts[new Random().Next(prompts.Length)];
-        Console.WriteLine($"{GetDescription()} - {prompt}");
-        ShowCountdown(5); // Display a countdown before starting the activity
+        string prompt = _prompts[0]; // Choose the first prompt for simplicity
+        Console.WriteLine($"{_description} - {prompt}");
+        ShowAnimation("Get ready to list...");
+        Thread.Sleep(3000);
 
         Console.WriteLine("Start listing items.");
         int itemsCount = 0;
@@ -207,17 +191,7 @@ class ListingActivity : Activity
         }
 
         Console.WriteLine($"You listed {itemsCount} items.");
-        ShowAnimation($"Listing completed: {GetType().Name} - Duration: {Duration} seconds");
+        ShowAnimation($"Listing completed: {_name} - Duration: {Duration} seconds");
         Thread.Sleep(3000);
-    }
-    private void ShowCountdown(int seconds)
-    {
-        for (int i = seconds; i > 0; i--)
-        {
-            Console.Clear();
-            Console.WriteLine($"Get ready to list... Starting in {i} seconds.");
-            Thread.Sleep(1000);
-        }
-        Console.Clear();
     }
 }

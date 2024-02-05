@@ -188,10 +188,9 @@ class ListingActivity : Activity
 
     protected override void PerformActivity()
     {
-        string prompt = prompts[0]; // Choose the first prompt for simplicity
+        string prompt = prompts[new Random().Next(prompts.Length)];
         Console.WriteLine($"{GetDescription()} - {prompt}");
-        ShowAnimation("Get ready to list...");
-        Thread.Sleep(3000);
+        ShowCountdown(5); // Display a countdown before starting the activity
 
         Console.WriteLine("Start listing items.");
         int itemsCount = 0;
@@ -210,5 +209,15 @@ class ListingActivity : Activity
         Console.WriteLine($"You listed {itemsCount} items.");
         ShowAnimation($"Listing completed: {GetType().Name} - Duration: {Duration} seconds");
         Thread.Sleep(3000);
+    }
+    private void ShowCountdown(int seconds)
+    {
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Clear();
+            Console.WriteLine($"Get ready to list... Starting in {i} seconds.");
+            Thread.Sleep(1000);
+        }
+        Console.Clear();
     }
 }

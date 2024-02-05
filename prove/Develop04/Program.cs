@@ -5,7 +5,23 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Welcome to the Mindfulness App!");
+        Console.WriteLine("Hello there!");
+
+        // ---------Create a Password to get access--------->>//Exceed requirements
+        Console.Write("Create a password to access the program: ");
+        string password = Console.ReadLine();
+
+        Console.Write("Enter the password: ");
+        string enteredPassword = Console.ReadLine();
+
+        while (enteredPassword != password)
+        {
+            Console.WriteLine("Invalid password. Please try again.");
+            Console.Write("Enter the password: ");
+            enteredPassword = Console.ReadLine();
+        }
+
+        //-----------------------------------------------------------------------
         Console.WriteLine("Choose an activity:");
         Console.WriteLine("1. Breathing\n2. Reflection\n3. Listing");
 
@@ -114,6 +130,7 @@ class BreathingActivity : Activity
         }
     }
 }
+
 class ReflectionActivity : Activity
 {
     private readonly string[] _prompts = {

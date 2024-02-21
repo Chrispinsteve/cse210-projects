@@ -146,7 +146,7 @@ class Program
 
                 case "total":
                     decimal totalExpenses = tracker.CalculateTotalExpenses();
-                    Console.WriteLine($"Total expenses: {totalExpenses}");
+                    Console.WriteLine($"Total expenses: ${totalExpenses}");
                     break;
 
                 default:
